@@ -17,14 +17,9 @@ if(isset($_COOKIE['sakura_mm'])){
   //不存在;
 }
 
-  @($css_nr=$_GET['css_nr']);
-  $index_css=fopen("txt/index_css","w");
-  fwrite($index_css,urldecode(base64_decode($css_nr)));
-  fclose($index_css);
-  
-  @($js_nr=$_GET['js_nr']);
-  $index_js=fopen("txt/index_js","w");
-  fwrite($index_js,urldecode(base64_decode($js_nr)));
-  fclose($index_js);
-  die("<script>alert('网站文件设置成功！'); window.location.replace('../../admin/wzsz.php');</script>");
+@($zd_nr=$_GET['zd']);
+$index_zd=fopen("txt/zd","w");
+fwrite($index_zd,$zd_nr);
+fclose($index_zd);
+die("<script>alert('表白标签置顶设置成功！！！'); window.location.replace('../../admin/wzsz.php');</script>");
 ?>
