@@ -1,0 +1,62 @@
+
+/*分类选择按钮背景颜色*/
+var ysz="#EEE8AA";
+/*分类选择按钮点击后的背景颜色*/
+var djysz="#FAFAD2";
+/*分类选择按钮字体颜色*/
+var zt_ysz="#A9A9A9";
+/*分类选择按钮点击后字体的颜色*/
+var zt_djysz="#C0C0C0";
+
+
+var hqjd=document.getElementsByClassName("love_xz");
+function xzkanys(yzy){
+hqjd[0].style.color=zt_ysz;
+hqjd[1].style.color=zt_ysz;
+hqjd[2].style.color=zt_ysz;
+hqjd[3].style.color=zt_ysz;
+hqjd[0].style.backgroundColor=ysz;
+hqjd[1].style.backgroundColor=ysz;
+hqjd[2].style.backgroundColor=ysz;
+hqjd[3].style.backgroundColor=ysz;
+if(yzy!=4){
+hqjd[yzy].style.color=zt_djysz;
+hqjd[yzy].style.backgroundColor=djysz;
+}
+}
+xzkanys(4);
+hqjd[0].onclick=function(){
+love_xzk(0);
+xzkanys(0);
+}
+hqjd[1].onclick=function(){
+love_xzk(1);
+xzkanys(1);
+}
+hqjd[2].onclick=function(){
+love_xzk(2);
+xzkanys(2);
+}
+hqjd[3].onclick=function(){
+love_xzk(3);
+xzkanys(3);
+}
+function getQueryString(name) {
+var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+var r = window.location.search.substr(1).match(reg);
+if (r != null) return decodeURI(r[2]);
+return 0;
+}
+var fhget=getQueryString("wan");
+var fhget=Number(fhget)+1;
+hqjd[fhget].style.color=zt_djysz;
+hqjd[fhget].style.backgroundColor=djysz;
+
+
+/*针对不能自动播放嘤乐的浏览器，点击页面就播放嘤乐*/
+var html=document.getElementsByClassName('html')[0];
+html.onclick=function(){
+	document.getElementsByClassName('bjyy')[0].play();
+}
+/*下面是js樱花飘落花瓣，不喜欢可以直接删除这行代码！*/
+</script><script src="/js/yh_hb.js">
