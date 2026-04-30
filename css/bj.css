@@ -1,0 +1,44 @@
+.nnt{
+  padding-top:10px;
+  width:100%;
+  /*background-color:#000000;*/
+  }
+.ggt{
+  border:1px #E87A90 solid;
+  margin:8px auto;
+  margin-top:0;
+  width:356px;
+  /*background-color:#0f0041;*/
+  height:150px;
+  /*background-image: url("../img/axbjs.jpg");*/
+  background-size:100% 100%;	
+  }
+.xzk{
+  /*background-color:#D7C4BB;*/
+  }
+
+.tzl{
+  background-color:#FEDFE1;
+  border:1px #9E7A7A solid;
+  color:#000;
+  width:356px;
+  margin:0 auto;
+  border-radius:22px;
+  line-height:22px;
+  }
+.love_xz{
+  border-radius:6px;
+  background-color:#FEDFE1;
+  width:80px;
+  text-align:center;
+  border:1px #000 solid;
+  float:left;
+  margin:10px 4px;
+  font-weight:700;
+  color:#947A6D;
+  }
+.love_xz:hover{
+  font-weight:600;
+  /*background-color:#E16B8C;
+  color:#F7FCFE;*/
+  }
