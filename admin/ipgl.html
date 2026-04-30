@@ -1,0 +1,141 @@
+<!-- 樱花表白墙制作人: 樱振宇 UI重构:TTS-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>IP记录与管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f0fdf4; background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%); min-height: 100vh; }
+        
+        /* 兼容 API 返回的 HTML 结构 (.ip) */
+        .ip {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid #10b981;
+        }
+        .ip p { font-size: 0.9rem; color: #374151; margin-bottom: 4px; font-weight: 600; }
+        
+        /* 自定义滚动条 */
+        #ipkj::-webkit-scrollbar { width: 6px; }
+        #ipkj::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
+    </style>
+    <script>
+        function ajax(url, yingzhenyu, sakura){
+           var xhr = new XMLHttpRequest();
+           xhr.open('GET', url, true);
+           xhr.send();
+           xhr.onreadystatechange = function(){
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) yingzhenyu(xhr.responseText);
+                    else sakura();
+                }
+            }
+        }
+        window.onload = function() {
+            yingzhenyu();
+        };
+    </script>
+</head>
+<body class="flex flex-col h-screen overflow-hidden">
+    
+    <!-- 顶部标题 -->
+    <div class="bg-white/80 backdrop-blur-md shadow-sm p-4 z-10 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-green-700"><i class="fa-solid fa-shield-halved mr-2"></i>IP 安全管理</h1>
+        <button onclick="history.back()" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-arrow-left"></i> 返回</button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div id="ipkj" class="flex-1 overflow-y-auto p-4 max-w-4xl mx-auto w-full space-y-3">
+        <!-- 动态内容将加载至此 -->
+        <div class="text-center text-gray-500 mt-10"><i class="fa-solid fa-spinner fa-spin mr-2"></i> 正在加载数据...</div>
+    </div>
+
+    <!-- 底部操作栏 -->
+    <div class="bg-white border-t p-3 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] z-20">
+        <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2 text-xs md:text-sm">
+            <button onclick="yingzhenyu()" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-green-50 text-green-600">
+                <i class="fa-solid fa-rotate text-lg mb-1"></i> 刷新
+            </button>
+            <button onclick="qk()" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-red-50 text-red-500">
+                <i class="fa-solid fa-trash text-lg mb-1"></i> 清空
+            </button>
+            <button onclick="sjjg()" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-blue-50 text-blue-500">
+                <i class="fa-solid fa-clock text-lg mb-1"></i> 间隔
+            </button>
+            <button onclick="fjip(1)" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <i class="fa-solid fa-ban text-lg mb-1"></i> 封禁
+            </button>
+        </div>
+    </div>
+
+    <!-- 封禁设置弹窗 -->
+    <div id="fjip_modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
+            <h3 class="text-lg font-bold text-gray-800 mb-3"><i class="fa-solid fa-gavel text-red-500 mr-2"></i>IP 封禁名单</h3>
+            <p class="text-xs text-gray-500 mb-2">使用 "|" 分隔，例如：192.168.0.1|10.0.0.1</p>
+            <textarea id="fjip" class="w-full h-40 border border-gray-200 rounded-xl p-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-300 resize-none text-sm mb-4"></textarea>
+            <div class="flex space-x-3">
+                <button onclick="fjipbc()" class="flex-1 bg-red-500 text-white py-2 rounded-xl font-bold hover:bg-red-600 transition">保存</button>
+                <button onclick="fjip(0)" class="flex-1 bg-gray-100 text-gray-600 py-2 rounded-xl font-bold hover:bg-gray-200 transition">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function yingzhenyu() {
+            var ipkj = document.getElementById("ipkj");
+            ipkj.innerHTML = "<div class='text-center py-10 text-gray-500'><i class='fa-solid fa-spinner fa-spin text-2xl'></i></div>";
+            ajax('../api/yzy/ipjl.php?zx=0', function(res){
+                ipkj.innerHTML = res;
+            }, function(){
+                ipkj.innerHTML = "<div class='text-center text-red-500 mt-10'>加载失败</div>";
+            });
+        }
+
+        function qk() {
+            if(!confirm("确定要清空所有记录吗？")) return;
+            ajax('../api/yzy/ipjl.php?zx=1', function(res){
+                alert(res);
+                if(res.indexOf("成功") !== -1) document.getElementById("ipkj").innerHTML = "";
+            }, function(){ alert("操作失败"); });
+        }
+
+        function sjjg() {
+            var jgsj = prompt('请输入IP发布间隔(分钟)，默认0：');
+            if(jgsj != null){
+                ajax('../api/yzy/ipjl.php?zx=2&jg=' + Number(jgsj), function(res){ alert(res); }, function(){ alert("操作失败"); });
+            }
+        }
+
+        function fjipbc(){
+            var val = document.getElementById("fjip").value;
+            ajax('../api/yzy/ipjl.php?zx=3&fjipdz=' + encodeURIComponent(val), function(res){ alert(res); }, function(){ alert("保存失败"); });
+        }
+
+        function fjip(state) {
+            var modal = document.getElementById('fjip_modal');
+            var textarea = document.getElementById("fjip");
+            if (state == 0) {
+                modal.classList.add('hidden');
+            } else {
+                modal.classList.remove('hidden');
+                textarea.value = "加载中...";
+                ajax('../api/yzy/ipjl.php?zx=4', function(res){
+                    if(res.indexOf("没有操作权限") !== -1) {
+                        modal.classList.add('hidden');
+                        alert("无权操作");
+                    } else {
+                        textarea.value = res;
+                    }
+                }, function(){ alert("加载失败"); modal.classList.add('hidden'); });
+            }
+        }
+    </script>
+</body>
+</html>

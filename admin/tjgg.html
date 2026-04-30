@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>发布扩列/公告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f3f4f6; height: 100vh; display: flex; flex-direction: column; }
+    </style>
+</head>
+<body class="p-4 max-w-3xl mx-auto w-full">
+
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-pen-nib text-pink-500 mr-2"></i>发布新内容</h1>
+        <button onclick="if(confirm('放弃编辑?')) history.back()" class="text-gray-500 hover:text-gray-700">
+            <i class="fa-solid fa-times text-lg"></i>
+        </button>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg flex flex-col flex-1 overflow-hidden">
+        <!-- 工具栏 -->
+        <div class="border-b bg-gray-50 px-4 py-2 flex space-x-3">
+            <button onclick="tjtp()" class="text-gray-600 hover:text-blue-500 hover:bg-white p-2 rounded transition" title="插入图片">
+                <i class="fa-regular fa-image"></i> 图片
+            </button>
+            <button onclick="tjsp()" class="text-gray-600 hover:text-blue-500 hover:bg-white p-2 rounded transition" title="插入视频">
+                <i class="fa-solid fa-film"></i> 视频
+            </button>
+        </div>
+
+        <!-- 编辑区 -->
+        <textarea id="text" class="flex-1 w-full p-4 resize-none focus:outline-none text-gray-700 text-lg leading-relaxed" placeholder="在这里写下你的内容..."></textarea>
+    </div>
+
+    <div class="mt-4 flex space-x-4">
+        <button onclick="fb()" class="flex-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-md hover:shadow-lg transition">
+            <i class="fa-solid fa-paper-plane mr-2"></i> 立即发布
+        </button>
+    </div>
+
+    <script>
+        function fb(){
+            var text = document.getElementById('text').value;
+            if(text.trim() == ""){
+                alert("内容不能为空！");
+            } else {
+                window.location.replace("../api/tj.php?wan=2&text=" + encodeURIComponent(text));
+            }
+        }
+        function tjtp(){
+            var url = prompt("请输入图片 URL:");
+            if(url) insertAtCursor('<img src="' + url + '" class="w-full rounded-lg my-2" />');
+        }
+        function tjsp(){
+            var url = prompt("请输入视频 URL:");
+            if(url) insertAtCursor('<video src="' + url + '" class="w-full rounded-lg my-2" controls></video>');
+        }
+        
+        function insertAtCursor(myValue) {
+            var myField = document.getElementById('text');
+            if (document.selection) {
+                myField.focus();
+                sel = document.selection.createRange();
+                sel.text = myValue;
+            } else if (myField.selectionStart || myField.selectionStart == '0') {
+                var startPos = myField.selectionStart;
+                var endPos = myField.selectionEnd;
+                myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
+            } else {
+                myField.value += myValue;
+            }
+        }
+    </script>
+</body>
+</html>
