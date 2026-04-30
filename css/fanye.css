@@ -1,0 +1,30 @@
+.fanye{
+  /*background-color:yellow;*/
+  width:220px;
+  height:30px;
+  margin:0 auto;
+  }
+.syy,.fanye_sz,.xyy{
+  text-align:center;
+  line-height:30px;
+  height:100%;
+  float:left;
+  width:70px;
+  border:1px #9F353A solid;
+  margin-left:1px;
+  background-color:#DC9FB4;
+  border-radius:10px;
+  font-weight:900;
+  color:#8F5A3C;
+  }
+.fanye_sz{
+  font-size:12px;
+  }
+.syy:hover{
+  background-color:#FEDFE1;
+  color:#DB8E71;
+  }
+.xyy:hover{
+  background-color:#FEDFE1;
+  color:#DB8E71;  
+  }

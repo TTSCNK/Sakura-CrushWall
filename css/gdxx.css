@@ -1,0 +1,18 @@
+.gdxx{
+  /*position:fixed;
+  
+  height:100%;
+  width:100%;*/
+  }
+.xx{
+  box-shadow:10px 10px 5px #888;
+  text-align:center;
+  padding:10px;
+  font-size:25px;
+  background-color:#fff;
+  width:245px;
+  margin:20px auto;
+  }
+.xx:hover{
+  color:red;
+  }

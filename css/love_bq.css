@@ -1,0 +1,222 @@
+.lo_ve{
+  border:1px #9E7A7A solid;
+  border-radius:6px;
+  overflow:hidden;
+  margin:10px auto;
+  width:350px;
+  background-color:#F8C3CD;
+  display: flex;
+  flex-direction: column;
+  /*border:1px #000 solid;*/
+  }
+.lo_v_e{
+  border:1px #E16B8C solid;
+  margin:10px 0;
+  width:330px;
+  }
+.love_zero_xx{
+  color:#64363C;
+  font-weight:900;
+  padding:10px;
+  }
+.love_zero_bz{
+  font-weight:700;
+  margin-right:10px;
+  text-align:right;
+  color:#86473F;
+  font-size:12px
+  }
+.love_zero_ta{
+  font-weight:900;
+  padding-left:12px;
+  background-color:#E16B8C;
+  color:#fff;
+  }
+.love_two_bj{
+  font-weight:900;
+  color:#DB4D6D;
+  }
+.love_two_ta{
+  padding-left:12px;
+  color:#F7FCFE;
+  background-color:#E16B8C;
+  }
+.gonggao{
+  box-shadow:3px 3px 3px #888;
+  background-color:#fff;
+  width:330px;
+  padding:10px;
+  color:#64363C;
+  font-weight:900;
+  border:1px #B5495B solid;
+  border-radius:10px;
+  background-color:#FEDFE1;
+  margin:10px auto;
+  }
+.n-r{
+  font-weight:900;
+  padding:10px;
+  margin:10px auto;
+  /*height:180px;*/
+  width:330px;
+  background-color:#FEDFE1;
+  border:1px #E16B8C solid;
+  overflow:hidden;
+  color:red;
+  border-radius:10px;
+  }
+.love_two_img{
+  height:120px;
+  /*background-color:#000000;*/
+  background-size:100% 100%;
+  }
+.lovd_two_ta{
+  border-radius:8px;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  padding:5px;
+  border:1px #33FFFF solid;
+  background-color:red;
+  }
+.love_two_dzplyd{
+  font-size:12px;
+  text-align:center;
+  color:#000;
+  }
+.yd-xx{
+  font-size:16px;
+  }
+
+/* 点赞和评论按钮区域 */
+.love_actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  background-color: transparent;
+  margin-top: auto;
+}
+
+/* 点赞按钮 */
+.like_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #64363C;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.like_button:hover {
+  color: #E16B8C;
+}
+
+.like_button.liked {
+  color: #E16B8C;
+}
+
+/* 评论按钮 */
+.comment_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #64363C;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.comment_button:hover {
+  color: #58B2DC;
+}
+
+/* 评论区域 */
+.comments_area {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-top: 1px solid #E16B8C;
+}
+
+/* 评论列表 */
+.comments_list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* 单条评论 */
+.comment_item {
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  border-left: 3px solid #E16B8C;
+}
+
+.comment_content {
+  font-size: 14px;
+  color: #64363C;
+  margin-bottom: 4px;
+}
+
+.comment_meta {
+  font-size: 12px;
+  color: #999;
+  text-align: right;
+}
+
+/* 评论输入区域 */
+.comment_input {
+  margin-top: 10px;
+}
+
+.comment_name {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-family: inherit;
+}
+
+.comment_textarea {
+    width: 100%;
+    height: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    margin-bottom: 8px;
+    font-family: inherit;
+}
+
+.comment_username {
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #e41749;
+}
+
+/* 提交评论按钮 */
+.submit_comment {
+  margin-top: 5px;
+  padding: 5px 15px;
+  background-color: #E16B8C;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  transition: background-color 0.3s ease;
+}
+
+.submit_comment:hover {
+  background-color: #DB4D6D;
+}
+
+/* 清除浮动 */
+.comment_input::after {
+  content: "";
+  display: table;
+  clear: both;
+}

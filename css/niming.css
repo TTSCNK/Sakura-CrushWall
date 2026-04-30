@@ -1,0 +1,21 @@
+.niming_bj{
+  width:330px;
+  text-align:center;
+  font-weight:900;
+  margin:0 auto;
+  /*background-color:blue;*/
+  }
+.ss{
+  border-radius:10px;
+  overflow:hidden;
+  margin:10px auto;
+  width:350px;
+  text-align:center;
+  border:2px #E87A90 solid;
+  background-color:#D7C4BB;
+  /*height:160px;*/
+  }
+.ss h3{
+  color:#86473F;
+  background-color:#F4A7B9;
+  }
