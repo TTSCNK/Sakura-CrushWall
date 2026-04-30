@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>404 - 页面走丢了</title>
+    
+    <!-- 引入 UI 框架 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 FontAwesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background-color: #ffdee9;
+            background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+            height: 100vh;
+            overflow: hidden;
+            color: #475569;
+        }
+
+        /* 樱花背景容器 */
+        .sakura-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .petal { position: absolute; background-color: #ffc0cb; border-radius: 150% 0 150% 0; animation: fall infinite linear; }
+        
+        @keyframes fall {
+            0% { transform: translate(0, -10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* 浮动动画 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .floating-icon { animation: float 4s ease-in-out infinite; }
+
+        /* 毛玻璃卡片 */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 40px -10px rgba(255, 182, 193, 0.5);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <!-- 樱花背景 -->
+    <div id="sakura-container" class="sakura-bg"></div>
+
+    <!-- 404 卡片 -->
+    <div class="glass max-w-md w-full rounded-3xl p-8 text-center relative overflow-hidden group">
+        
+        <!-- 装饰背景圆 -->
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+
+        <!-- 核心内容 -->
+        <div class="relative z-10">
+            <div class="floating-icon mb-6">
+                <i class="fa-solid fa-heart-crack text-8xl bg-gradient-to-r from-pink-400 to-rose-400 text-transparent bg-clip-text drop-shadow-sm"></i>
+            </div>
+            
+            <h1 class="text-6xl font-black text-gray-800 mb-2 tracking-tighter">404</h1>
+            <h2 class="text-xl font-bold text-gray-600 mb-4">这里好像没有你要找的风景</h2>
+            
+            <p class="text-sm text-gray-500 mb-8 leading-relaxed">
+                就像飘落的樱花一样，这个页面已经随风而去了。<br>
+                或许你可以回到起点，重新书写你的故事。
+            </p>
+
+            <div class="flex flex-col space-y-3">
+                <a href="index.php" class="w-full bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-500 hover:to-rose-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-pink-200 active:scale-95 transition-all duration-200 flex items-center justify-center">
+                    <i class="fa-solid fa-house mr-2"></i> 返回表白墙首页
+                </a>
+                
+                <button onclick="history.back()" class="w-full bg-white hover:bg-gray-50 text-gray-600 font-bold py-3 rounded-xl shadow-sm border border-gray-100 active:scale-95 transition-all duration-200 flex items-center justify-center">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> 返回上一页
+                </button>
+            </div>
+            
+            <div class="mt-6 text-xs text-gray-400">
+                <span id="countdown">5</span> 秒后自动返回首页...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 樱花特效 (与主页一致)
+        function createSakura() {
+            const container = document.getElementById('sakura-container');
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            const size = Math.random() * 10 + 5;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 5 + 5;
+            petal.style.width = `${size}px`; petal.style.height = `${size}px`;
+            petal.style.left = `${left}%`; petal.style.animationDuration = `${duration}s`;
+            container.appendChild(petal);
+            setTimeout(() => petal.remove(), duration * 1000);
+        }
+        setInterval(createSakura, 600);
+
+        // 2. 倒计时自动跳转
+        let seconds = 5;
+        const countdownEl = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            seconds--;
+            countdownEl.innerText = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = 'index.php';
+            }
+        }, 1000);
+        
+        // 点击页面任意位置生成小爱心 (彩蛋)
+        document.body.onclick = function(e) {
+            if(e.target.closest('a,button')) return;
+            var heart = document.createElement("span");
+            heart.innerText = "💔"; // 404页面用破碎的心或枯萎的花
+            heart.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;z-index:9999;color:#ec4899;pointer-events:none;transition:1s;font-size:1.2rem`;
+            document.body.appendChild(heart);
+            setTimeout(()=>{ 
+                heart.style.top = (e.clientY-100)+"px"; 
+                heart.style.opacity=0; 
+                setTimeout(()=>heart.remove(),1000); 
+            },10);
+        }
+    </script>
+</body>
+</html>

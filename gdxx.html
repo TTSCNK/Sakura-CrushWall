@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>更多选项 | 建陵表白墙</title>
+    <!-- 引入 Tailwind CSS (无需下载，直接使用) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 FontAwesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background-color: #ffdee9;
+            background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 樱花背景动画 */
+        .sakura-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .petal {
+            position: absolute;
+            background-color: #ffc0cb;
+            border-radius: 150% 0 150% 0;
+            animation: fall infinite linear;
+        }
+        @keyframes fall {
+            0% { transform: translate(0, -10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* 毛玻璃卡片效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        /* 隐藏滚动条但保留功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <!-- 背景樱花特效容器 -->
+    <div id="sakura-container" class="sakura-bg"></div>
+
+    <!-- 主容器 -->
+    <div class="w-full max-w-md space-y-6">
+        
+        <!-- 头部 -->
+        <div class="text-center space-y-2">
+            <h1 class="text-3xl font-bold text-pink-600 drop-shadow-sm">🌸 建陵表白墙</h1>
+            <p class="text-gray-500 text-sm">在这里，说出你的心里话</p>
+        </div>
+
+        <!-- 菜单网格 -->
+        <div class="grid grid-cols-2 gap-4">
+            
+            <!-- 表白按钮 -->
+            <div onclick="openModal('love')" class="glass-card rounded-2xl p-6 text-center cursor-pointer transform transition hover:scale-105 active:scale-95 group">
+                <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-pink-200 transition">
+                    <i class="fa-solid fa-heart text-pink-500 text-xl"></i>
+                </div>
+                <h3 class="font-bold text-gray-700">为爱表白</h3>
+                <p class="text-xs text-gray-500 mt-1">大声说出爱</p>
+            </div>
+
+            <!-- 日常按钮 -->
+            <div onclick="openModal('daily')" class="glass-card rounded-2xl p-6 text-center cursor-pointer transform transition hover:scale-105 active:scale-95 group">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-200 transition">
+                    <i class="fa-solid fa-pen-nib text-blue-500 text-xl"></i>
+                </div>
+                <h3 class="font-bold text-gray-700">日常趣事</h3>
+                <p class="text-xs text-gray-500 mt-1">分享生活点滴</p>
+            </div>
+
+            <!-- 个人主页 -->
+            <div onclick="window.location.href='http://www.ttscn.top/'" class="glass-card rounded-2xl p-4 flex items-center space-x-3 cursor-pointer hover:bg-white/80 transition col-span-2">
+                <img src="http://q1.qlogo.cn/g?b=qq&nk=3381229330&s=640" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
+                <div class="flex-1">
+                    <h4 class="font-bold text-gray-700 text-sm">个人主页</h4>
+                    <p class="text-xs text-gray-400">点击访问主页</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300"></i>
+            </div>
+
+            <!-- 扩列 -->
+            <div onclick="window.location.href='../admin/tjgg.html'" class="glass-card rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-white/80 transition">
+                <i class="fa-solid fa-user-plus text-green-500 text-2xl mb-2"></i>
+                <span class="text-xs font-medium text-gray-600">发布扩列</span>
+            </div>
+
+            <!-- 游戏 2048 -->
+            <div onclick="window.location.href='game/2048'" class="glass-card rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-white/80 transition">
+                <i class="fa-solid fa-cubes text-yellow-500 text-2xl mb-2"></i>
+                <span class="text-xs font-medium text-gray-600">2048小游戏</span>
+            </div>
+
+             <!-- 游戏 CXK -->
+             <div onclick="window.location.href='game/cxk1'" class="glass-card rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-white/80 transition col-span-2">
+                <i class="fa-solid fa-basketball text-orange-500 text-2xl mb-2"></i>
+                <span class="text-xs font-medium text-gray-600">坤坤打篮球</span>
+            </div>
+        </div>
+
+        <footer class="text-center text-xs text-gray-400 mt-8">
+            <p>制作人: TTS | QQ: 3381229330</p>
+        </footer>
+    </div>
+
+    <!-- 模态框遮罩 (默认隐藏) -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden transition-opacity opacity-0 flex items-center justify-center p-4" onclick="closeModal(event)">
+        
+        <!-- 表单容器 -->
+        <div id="modal-content" class="bg-white rounded-2xl w-full max-w-sm shadow-2xl transform scale-95 transition-all duration-300 overflow-hidden" onclick="event.stopPropagation()">
+            
+            <!-- 头部 -->
+            <div class="bg-gradient-to-r from-pink-500 to-rose-400 p-4 text-white flex justify-between items-center">
+                <h3 id="modal-title" class="font-bold text-lg">发布内容</h3>
+                <button onclick="closeModal()" class="hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- 表单内容 -->
+            <div class="p-6 space-y-4">
+                
+                <!-- 动态输入框 1 -->
+                <div>
+                    <label id="label-1" class="block text-xs font-medium text-gray-500 mb-1">对方昵称</label>
+                    <input type="text" id="input-1" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:bg-white transition text-sm" placeholder="必填">
+                </div>
+
+                <!-- 动态输入框 2 -->
+                <div>
+                    <label id="label-2" class="block text-xs font-medium text-gray-500 mb-1">您的昵称</label>
+                    <input type="text" id="input-2" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:bg-white transition text-sm" placeholder="选填">
+                </div>
+
+                <!-- 文本域 -->
+                <div>
+                    <label id="label-area" class="block text-xs font-medium text-gray-500 mb-1">内容</label>
+                    <textarea id="input-text" rows="5" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:bg-white transition text-sm resize-none" placeholder="写下你想说的话..."></textarea>
+                </div>
+
+                <!-- 按钮组 -->
+                <div class="flex space-x-3 pt-2">
+                    <button onclick="closeModal()" class="flex-1 px-4 py-2 rounded-lg text-gray-500 bg-gray-100 hover:bg-gray-200 transition text-sm font-medium">取消</button>
+                    <button id="submit-btn" class="flex-1 px-4 py-2 rounded-lg text-white bg-gradient-to-r from-pink-500 to-rose-500 hover:shadow-lg transition text-sm font-medium transform active:scale-95">发布</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 核心 AJAX 函数 (保留原逻辑)
+        function ajax(url, successCallback, errorCallback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        successCallback(xhr.responseText);
+                    } else {
+                        if (errorCallback) errorCallback();
+                    }
+                }
+            }
+        }
+
+        // 樱花特效脚本
+        function createSakura() {
+            const container = document.getElementById('sakura-container');
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            // 随机大小、位置、动画时长
+            const size = Math.random() * 10 + 5;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 5 + 5;
+            const delay = Math.random() * 5;
+
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${left}%`;
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${delay}s`;
+
+            container.appendChild(petal);
+
+            // 动画结束后移除元素
+            setTimeout(() => {
+                petal.remove();
+            }, (duration + delay) * 1000);
+        }
+        // 生成初始樱花
+        setInterval(createSakura, 500);
+
+
+        // UI 逻辑
+        let currentType = 0; // 0: 表白, 1: 日常
+
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalContent = document.getElementById('modal-content');
+        
+        // 元素引用
+        const label1 = document.getElementById('label-1');
+        const input1 = document.getElementById('input-1');
+        const label2 = document.getElementById('label-2');
+        const input2 = document.getElementById('input-2');
+        const labelArea = document.getElementById('label-area');
+        const inputText = document.getElementById('input-text');
+        const modalTitle = document.getElementById('modal-title');
+        const submitBtn = document.getElementById('submit-btn');
+
+        function openModal(type) {
+            // 重置表单
+            input1.value = "";
+            input2.value = "";
+            inputText.value = "";
+
+            modalBackdrop.classList.remove('hidden');
+            // 稍微延迟以触发CSS过渡
+            setTimeout(() => {
+                modalBackdrop.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+
+            if (type === 'love') {
+                currentType = 0;
+                modalTitle.innerText = "❤️ 为爱表白";
+                label1.innerText = "对方昵称 (必填)";
+                input1.placeholder = "Ta的名字";
+                label2.innerText = "您的昵称 (选填)";
+                input2.placeholder = "留空则匿名";
+                labelArea.innerText = "表白内容";
+                inputText.placeholder = "山有木兮木有枝...";
+                submitBtn.onclick = () => submitLove();
+            } else {
+                currentType = 1;
+                modalTitle.innerText = "🗒 日常趣事";
+                label1.innerText = "图片链接 (选填)";
+                input1.placeholder = "http://...";
+                label2.innerText = "您的昵称 (必填)";
+                input2.placeholder = "您的名字";
+                labelArea.innerText = "趣事内容";
+                inputText.placeholder = "今天发生了什么...";
+                submitBtn.onclick = () => submitDaily();
+            }
+        }
+
+        function closeModal(e) {
+            // 如果点击的是背景或者调用关闭
+            if (!e || e.target === modalBackdrop || !e.target.closest('#modal-content')) {
+                modalBackdrop.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modalBackdrop.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // 提交表白逻辑 (逻辑还原)
+        function submitLove() {
+            const val1 = input1.value.trim(); // 对方昵称
+            const val2 = input2.value.trim(); // 你的昵称
+            const valText = inputText.value.trim(); // 内容
+
+            if (val1.length > 99 || val2.length > 99 || valText.length > 520) {
+                alert("内容过长！\n规范: 昵称<99字，内容<520字");
+                return;
+            }
+            if (val1.length === 0 || valText.length === 0) {
+                alert("请填写完整！对方昵称和内容是必填的。");
+                return;
+            }
+
+            // 发送请求
+            submitBtn.disabled = true;
+            submitBtn.innerText = "发布中...";
+            
+            ajax(`api/tj.php?&wan=0&mz1=${encodeURIComponent(val1)}&mz2=${encodeURIComponent(val2)}&text=${encodeURIComponent(valText)}`, 
+                function(res) {
+                    if (res == "内容添加成功！") {
+                        alert("❤️ 表白成功！");
+                        window.location.replace('index.php');
+                    } else {
+                        alert(res);
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = "发布";
+                    }
+                }, 
+                function() {
+                    alert('网络错误，请重试！');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "发布";
+                }
+            );
+        }
+
+        // 提交日常逻辑 (逻辑还原)
+        function submitDaily() {
+            const val1 = input1.value.trim(); // 图片链接
+            const val2 = input2.value.trim(); // 你的昵称
+            const valText = inputText.value.trim(); // 内容
+
+            if (val1.length > 255 || val2.length > 6 || valText.length > 255) {
+                alert("格式错误！\n规范: 图片链接<255字，昵称<6字，内容<255字");
+                return;
+            }
+            if (val2.length === 0 || valText.length === 0) {
+                alert("请填写完整！您的昵称和内容是必填的。");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "发布中...";
+
+            ajax(`api/tj.php?&wan=1&mz1=${encodeURIComponent(val1)}&mz2=${encodeURIComponent(val2)}&text=${encodeURIComponent(valText)}`, 
+                function(res) {
+                    if (res == "内容添加成功！") {
+                        alert("🗒 发布成功！");
+                        window.location.replace('index.php');
+                    } else {
+                        alert(res);
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = "发布";
+                    }
+                }, 
+                function() {
+                    alert('网络错误，请重试！');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "发布";
+                }
+            );
+        }
+    </script>
+</body>
+</html>
